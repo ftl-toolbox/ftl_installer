@@ -1,0 +1,42 @@
+# -*- coding: utf-8 -*-
+
+try:
+    from setuptools import setup
+except ImportError:
+    import warnings
+    warnings.warn('No setuptools. Script creation will be skipped.')
+    from distutils.core import setup
+
+
+setup(name='ftl_installer',
+      version='%VERSION%',
+      description='Ansible based installer framework.',
+      maintainer='Jason DeTiberus',
+      maintainer_email='jdetiber@redhat.com',
+      url='https://github.com/ftl-toolbox/ftl_installer',
+      license='Apache License, Version 2.0',
+      package_dir={'ftl_installer': 'ftl_installer'},
+      packages=[
+          'ftl_installer',
+          'ftl_installer.parser'
+      ],
+      install_requires=['click', 'six'],
+      classifiers=[
+          "Development Status :: 1 - Planning",
+          "Topic :: Utilities",
+          "Environment :: Console",
+          'Programming Language :: Python :: 2.7',
+          "License :: OSI Approved :: Apache Software License",
+      ],
+      test_suite='nose.collector',
+      tests_require=['mock',
+                     'nose',
+                     'coverage',
+                     'pep8',
+                     'pyflakes'],
+      setup_requires=['nose>=1.0'],
+      entry_points={
+          'console_scripts': [
+              'ftl_installer = ftl_installer.parser.Parser:main',
+          ],
+      })

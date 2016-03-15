@@ -1,0 +1,4 @@
+# -*- coding: utf-8 -*-
+# ftl_installer package
+
+__version__ = '%VERSION%'

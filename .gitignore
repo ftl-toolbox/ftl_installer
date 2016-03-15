@@ -60,3 +60,10 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
+
+# Virtualenv
+venv
+
+# Compiled files
+ftl_installer/__init__.py
+setup.py
