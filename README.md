@@ -27,6 +27,12 @@ will override the python version used to create the virtual environment.
 FTL_PYTHON=/usr/bin/python3.4 make venv
 ```
 
+Activate the virtual env
+
+```
+. venv/bin/activate
+```
+
 ## Running the cli
 
 Once a virtual environment has been created, `ftl_installer` will be in `PATH`.

@@ -29,6 +29,7 @@ venv: clean __init__.py setup.py
 	@echo "#############################################"
 	virtualenv -p $(FTL_PYTHON) venv
 	. venv/bin/activate && pip install -r requirements.txt
+	. venv/bin/activate && pip install -r test-requirements.txt
 	. venv/bin/activate && python setup.py develop
 
 install: __init__.py setup.py
