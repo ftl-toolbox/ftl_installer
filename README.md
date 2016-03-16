@@ -43,12 +43,6 @@ ftl_installer --help
 
 ## Running tests
 
-Run `make install` to install the test dependencies.
-
-```
-make install
-```
-
 Run `make test` to run unit tests,
 [pep8](http://www.python.org/dev/peps/pep-0008) style formatting
 checks and [pyflakes](https://pypi.python.org/pypi/pyflakes) checks.
