@@ -2,6 +2,17 @@
 import argparse
 import ftl_installer
 import logging
+import pprint
+import yaml
+
+class ConfigHandler(object):
+    '''
+    Class to handle the configuration given with `--config` option
+    '''
+
+    def __init__(self, config_file):
+        with open(config_file) as config_file:
+            self.stored_config = yaml.safe_load(config_file)
 
 
 class Parser(object):
@@ -17,6 +28,8 @@ class Parser(object):
 
         self.parser.add_argument('-q', '--quiet', action='store_true', dest='quiet',
                                  default=False, help='supress output')
+
+        self.parser.add_argument('-c', '--config', help='config file')
 
 
 def main():  # pragma: no cover
@@ -36,6 +49,12 @@ def main():  # pragma: no cover
 
     ftl_logger.addHandler(ftl_stream_handler)
     ftl_logger.debug("initialized ftl-logging at level: {0}".format(log_level))
+
+    # If the configuration file is provided, parse and store it.
+    if args.config:
+        ftl_config = ConfigHandler(args.config)
+        # for test purpose, remove later
+        pprint.pprint(ftl_config.stored_config)
 
     # Do stuff.
     # args.cmd(args)
