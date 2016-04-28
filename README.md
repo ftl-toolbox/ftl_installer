@@ -29,10 +29,15 @@ FTL_PYTHON=/usr/bin/python3.4 make venv
 
 Activate the virtual env
 
+* For python2.7 environment:
 ```
-. venv/bin/activate
+. venv2.7/bin/activate
 ```
 
+* For python3.4 environment:
+```
+. venv3.4/bin/activate
+```
 ## Running the cli
 
 Once a virtual environment has been created, `ftl_installer` will be in `PATH`.

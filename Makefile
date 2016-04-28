@@ -20,17 +20,17 @@ setup.py: setup.py.in
 clean:
 	@find . -type f -regex ".*\.py[co]$$" -delete
 	@find . -type f \( -name "*~" -or -name "#*" \) -delete
-	@rm -fR venv build dist $(NAME).egg-info
+	@rm -fR venv$(PYVER) build dist $(NAME).egg-info
 	@rm -fR setup.py ftl_installer/__init__.py
 
 venv: clean __init__.py setup.py
 	@echo "#############################################"
 	@echo "# Creating a python-$(PYVER) virtualenv"
 	@echo "#############################################"
-	virtualenv -p $(FTL_PYTHON) venv
-	. venv/bin/activate && pip install -r requirements.txt
-	. venv/bin/activate && pip install -r test-requirements.txt
-	. venv/bin/activate && python setup.py develop
+	virtualenv -p $(FTL_PYTHON) venv$(PYVER)
+	. venv$(PYVER)/bin/activate && pip install -r requirements.txt
+	. venv$(PYVER)/bin/activate && pip install -r test-requirements.txt
+	. venv$(PYVER)/bin/activate && python setup.py develop
 
 install: __init__.py setup.py
 	python setup.py install
@@ -47,7 +47,7 @@ pep8: __init__.py setup.py
 	@echo "#############################################"
 	@echo "# Running PEP8 Compliance Tests"
 	@echo "#############################################"
-	pep8 --max-line-length=120 --exclude="tests/*,venv/*" --ignore=E501,E121,E124 $(NAME)/
+	pep8 --max-line-length=120 --exclude="tests/*,venv$(PYVER)/*" --ignore=E501,E121,E124 $(NAME)/
 
 pyflakes: __init__.py setup.py
 	@echo "#############################################"
@@ -60,20 +60,20 @@ ci-nosetests: __init__.py setup.py
 	@echo "#############################################"
 	@echo "# Running Unit Tests"
 	@echo "#############################################"
-	. venv/bin/activate && python setup.py nosetests
+	. venv$(PYVER)/bin/activate && python setup.py nosetests
 
 ci-pep8: __init__.py setup.py
 	@echo "#############################################"
 	@echo "# Running PEP8 Compliance Tests"
 	@echo "#############################################"
-	. venv/bin/activate && pep8 --max-line-length=120 --exclude="tests/*,venv/*" --ignore=E501,E121,E124 $(NAME)/
+	. venv$(PYVER)/bin/activate && pep8 --max-line-length=120 --exclude="tests/*,venv$(PYVER)/*" --ignore=E501,E121,E124 $(NAME)/
 
 ci-pyflakes: __init__.py setup.py
 	@echo "#############################################"
 	@echo "# Running Pyflakes Sanity Tests"
 	@echo "# Note: most import errors may be ignored"
 	@echo "#############################################"
-	. venv/bin/activate && pyflakes $(NAME)/
+	. venv$(PYVER)/bin/activate && pyflakes $(NAME)/
 
 ci: clean venv ci-nosetests ci-pep8 ci-pyflakes
 
