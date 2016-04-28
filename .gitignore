@@ -62,7 +62,8 @@ target/
 .ipynb_checkpoints
 
 # Virtualenv
-venv
+venv2.7
+venv3.4
 
 # Compiled files
 ftl_installer/__init__.py

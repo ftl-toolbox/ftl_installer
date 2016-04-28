@@ -18,9 +18,12 @@ setup(name='ftl_installer',
       package_dir={'ftl_installer': 'ftl_installer'},
       packages=[
           'ftl_installer',
-          'ftl_installer.parser'
+          'ftl_installer.parser',
+          'ftl_installer.config'
       ],
-      install_requires=['click', 'six'],
+      install_requires=['click',
+                        'six',
+                        'PyYAML'],
       classifiers=[
           "Development Status :: 1 - Planning",
           "Topic :: Utilities",
