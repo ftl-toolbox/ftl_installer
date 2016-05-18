@@ -11,9 +11,7 @@ ftl_installer -w foo_workflow.yml -o foo_installer
 The Workflow Config defines the following Primitives:
 
 ###Providers (Provider Engine)
-TODO: Better define the Provider Engine
-
-Providers defines the configuration for the Provider Engine. This includes how host
+The providers key defines the configuration for the Provider Engine. This includes how host
 information is gathered for use by the generated installer. The following scenarios
 should be handled by provider engine:
 - Gathering of host information:
@@ -45,33 +43,29 @@ providers:
     - alpha_provisioner
     - beta_provisioner
   gce:
-  static_host:
-  
+  static_host:  
 ```
 
-TODO: Describe what a provider plugin is
-TODO: define and describe the built-in provider plugins
-TODO: define and describe the provider plugin interface
-
-TODO: Describe what a provisioner plugin is
-TODO: define and describe the built-in provisioner plugins
-TODO: define and describe the provisioner plugin interface
-
-TODO: define how inventories interact with the provider plugins
-      and/or provisioner plugins      
+**Additional Provider items needing further definition:**
+- Describe what a provider plugin is
+- define and describe the built-in provider plugins
+- define and describe the provider plugin interface
+- Describe what a provisioner plugin is
+- define and describe the built-in provisioner plugins
+- define and describe the provisioner plugin interface
+- define how inventories interact with the provider plugins
+  and/or provisioner plugins
 
 ###Config (Config Engine)
-
-TODO: better define the Config Engine
-
-Config defines the configuration file for the generated installer.
-The purpose of the config section is to:
-- define the current configuration file version (`version`)
-- define the default config file location (`default_path`). If not set, the default
+The config key defines the configuration of the Config Engine. The Config Engine is
+responsible for managing the configuration file for the generated installer.
+The Config Engine manages the following things:
+- current configuration file version (`version`)
+- default config file location (`default_path`). If not set, the default
   config file should be: `~/.config/<generated_installer_name>`.
-- define configuration migrations for previous configuration file
+- configuration migrations for previous configuration file
   versions through `config_migration` plugins
-- define configuration file validation through `config_validator` plugins
+- configuration file validation through `config_validator` plugins
 
 In order to allow for flexibility on when to apply migrations and particular
 validations, we borrow conditional primitive `when` from ansible along with the
@@ -83,27 +77,6 @@ the resulting config file should be persisted to disk.
 
 The validators section is evaluated after executing migrations, prior to persisting
 configs to disk, or through the invocation of the `config_save` task by the workflow engine. 
-
-TODO: Define the ftl-managed config schema.
-
-TODO: Define explicit generated installer config schema definition.
-
-TODO: Define implicit generated installer config schema definition
-      (schema determined through items in the workflow configuration)
-
-TODO: Provide example for user-provided config file
-
-TODO: Provide a way to specify which version of the ftl-managed schema
-      is used by each version of the generated installer config version.
-
-TODO: Describe behavior for ftl-managed config schema migrations and validations
-
-TODO: Describe built-in validators. This should include validation that the
-      generated installer config schema does not conflict with ftl-managed config
-      schema, circular reference detection, etc
-      
-TODO: define the interface and variables available throught the config engine execution
-      lifecycle
 
 Example config definition:
 ```
@@ -127,6 +100,20 @@ config:
   - valid_ha_config:
     when: "{{ config.deployment.ha | default(false) }}"
 ```
+
+TODO: Define the ftl-managed config schema.
+TODO: Define explicit generated installer config schema definition.
+TODO: Define implicit generated installer config schema definition
+      (schema determined through items in the workflow configuration)
+TODO: Provide example for user-provided config file
+TODO: Provide a way to specify which version of the ftl-managed schema
+      is used by each version of the generated installer config version.
+TODO: Describe behavior for ftl-managed config schema migrations and validations
+TODO: Describe built-in validators. This should include validation that the
+      generated installer config schema does not conflict with ftl-managed config
+      schema, circular reference detection, etc
+TODO: define the interface and variables available throught the config engine execution
+      lifecycle
 
 ###Variants (Variant Engine)
 
