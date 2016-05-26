@@ -3,6 +3,8 @@ import argparse
 import ftl_installer
 import logging
 
+from ftl_installer.config.Config import Config
+
 
 class Parser(object):
     ''' The parser. '''
@@ -17,6 +19,9 @@ class Parser(object):
 
         self.parser.add_argument('-q', '--quiet', action='store_true', dest='quiet',
                                  default=False, help='supress output')
+
+        self.parser.add_argument('-c', '--config', action='store_true',
+                                 default=False, help='config file')
 
 
 def main():  # pragma: no cover
@@ -36,6 +41,12 @@ def main():  # pragma: no cover
 
     ftl_logger.addHandler(ftl_stream_handler)
     ftl_logger.debug("initialized ftl-logging at level: {0}".format(log_level))
+
+    if args.config:
+        ftl_config = Config(is_config_file=True)
+    else:
+        ftl_config = Config()
+    print(ftl_config)
 
     # Do stuff.
     # args.cmd(args)
