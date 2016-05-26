@@ -1,4 +1,4 @@
-Proposal for config file format:
+Proposal for the generated installer config file format:
 ```
 # top level values represent installer config
 version: v1
